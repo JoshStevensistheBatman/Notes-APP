@@ -1,0 +1,29 @@
+{% extends "notes/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Create Note{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-primary">Create a New Note</h1>
+
+    <form method="POST" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <!-- Title input -->
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            {{ form.title|add_class:"form-control" }}
+        </div>
+
+        <!-- Content input -->
+        <div class="mb-3">
+            <label for="id_content" class="form-label">Content</label>
+            {{ form.content|add_class:"form-control" }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Save Note</button>
+        <a href="{% url 'notes:list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

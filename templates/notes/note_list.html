@@ -1,0 +1,28 @@
+{% extends "notes/base.html" %}
+
+{% block title %}All Notes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-primary mb-4">Your Notes</h1>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for note in notes %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ note.title }}</h5>
+                    <p class="card-text">{{ note.content|truncatewords:20 }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{% url 'notes:delete' note.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">No notes yet. <a href="{% url 'notes:create' %}">Create one!</a></p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
