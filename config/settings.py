@@ -25,10 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG") == "True"
-
-ALLOWED_HOSTS = []
-
+#DEBUG = os.getenv("DEBUG") == "True"
+DEBUG = os.environ.get("DEBUG", "false").lower() == "true"
+ALLOWED_HOSTS = ["notes-app-joshua.onrender.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://notes-app-joshua.onrender.com"
+]
 
 # Application definition
 
@@ -87,9 +89,11 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT"),
     } 
 }
+# install driver for postgres - install pip install psycopg2-binary
 # install dj-database-url
 # override existing databases
-DATABASES['default'] = dj_database_url.parse("postgresql://root:jnFmf3HWb8UpipW9VZKCKJ8GPhCjOdYF@dpg-d5nh36dactks73cg5bv0-a.oregon-postgres.render.com/josh_notes_app")
+DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
