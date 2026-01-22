@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ["notes-app-joshua.onrender.com"]
 CSRF_TRUSTED_ORIGINS = [
     "https://notes-app-joshua.onrender.com"
 ]
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
